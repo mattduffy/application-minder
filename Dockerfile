@@ -1,5 +1,5 @@
 FROM node:argon
-MAINTAINTER Matthew Duffy <mattduffy@gmail.com>
+MAINTAINER Matthew Duffy <mattduffy@gmail.com>
 
 ENV INSTALL_PATH=/webapp
 ENV INDEX_FILE=index.js
