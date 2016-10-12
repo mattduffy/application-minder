@@ -1,0 +1,19 @@
+{
+  "name": "application-minder",
+  "version": "1.0.0",
+  "description": "The best way to minder the statuses of your job applications.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattduffy/application-minder.git"
+  },
+  "author": "Matthew Duffy <mattduffy@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattduffy/application-minder/issues"
+  },
+  "homepage": "https://github.com/mattduffy/application-minder#readme"
+}
