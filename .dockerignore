@@ -1,0 +1,9 @@
+.git
+.gitignore
+.npmignore
+node_modules
+npb-debug.log
+*.swp
+*.so
+.DS_Store
+tmp/
