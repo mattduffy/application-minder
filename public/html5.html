@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<style type="text/css">
+			body {font-size: 100%; }
+			fieldset { width: 150px; }
+			.center {cursor: move; position: absolute; top: 50px; left: 300px; width: 400px; padding: 20px; background-color: gray; border-radius: 15px; }
+			.drop_zone {width: 500px; height: 250px; border: 1px dotted black; border-radius: 15px; display: table-cell; background-color: lightgray; text-align: center; vertical-align: middle; }
+			.drop_zone h2 { font-family: Futura; font-style: italic; }
+			.drop_result li {font-family: Futura; font-style: normal; font-weight: normal;}
+		</style>
+	</head>
+	<script>
+		
+	</script>
+	<body id="body">
+		<fieldset name="page-coords" draggable="true">
+			<label for="x-coord">cursor x coordinate: <input type="text" size="5" id="x-coord" name="x-coord"><br>
+			<label for="y-coord">cursor y coordinate: <input type="text" size="5" id="y-coord" name="y-coord">
+		</fieldset>
+		<fieldset name="drag-div-coords">
+			<label for="x-coord">div x coordinate: <input type="text" size="5" id="div-x-coord" name="div-x-coord"><br>
+			<label for="y-coord">div y coordinate: <input type="text" size="5" id="div-y-coord" name="div-y-coord">			
+		</fieldset>
+		<div class="center">
+			<div class="drop_zone" id="drop_zone" draggable="true"><h2>Drop Files Here</h2></div>
+			<div class="drop_result" id="drop_result"></div>
+		</div>
+	
+	
+		<script>
+			var $ = document;
+			var evt = event ? event : window.event;
+			var handleDocumentCursorLocationEvent = function (evt) {
+				event = evt ? evt : window.event;
+				evt.preventDefault();
+				evt.stopPropagation();
+				var _x =document.getElementById('x-coord')
+				, _y = document.getElementById('y-coord');
+				_x.value = evt.x
+				_y.value = evt.y;
+			}
+			var handleDragDivCursorLocationEvent = function (evt) {
+				evt.preventDefault();
+				evt.stopPropagation();
+				var _x =document.getElementById('div-x-coord')
+				, _y = document.getElementById('div-y-coord');
+				_x.value = evt.x
+				_y.value = evt.y;
+			}
+			
+			document.onmousemove = handleDocumentCursorLocationEvent;
+			document.getElementById('drop_zone').onmouseover = handleDragDivCursorLocationEvent;
+			
+			if (!window.FileReader || !window.File || !window.FileList || !window.Blob) {
+				alert("fuck you! get a new browser.");
+			} else if (window.FileReader && window.File && window.FileList && window.Blob) {
+				var handleDragOverEvent = function (evt) {
+					evt.preventDefault();
+					evt.stopPropagation();
+					evt.dataTransfer.dropEffect = 'copy';
+					console.log('dragoverevent: ');
+					console.log(evt);
+				};
+				var handleDropEvent = function (evt) {
+					evt.preventDefault();
+					evt.stopPropagation();
+					console.log('dropevent: ');
+					console.log(evt);
+
+					var files = evt.dataTransfer.files
+					, output = []
+					, dropResult = document.getElementById('drop_result');
+					
+					for (var i = 0, f; f = files[i]; i++) {
+						var _size = f.size / 1024;
+						//alert(_size);
+						output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') ', Math.floor(_size) , ' Kb', '</li>');
+					}
+					dropResult.innerHTML = '<ul>' + output.join('') + '</ul>';
+
+				};
+				var dropZone = $.getElementById('drop_zone')
+				, dropResult = $.getElementById('drop_result');
+				dropZone.addEventListener('dragover', handleDragOverEvent, false);
+				dropZone.addEventListener('drop', handleDropEvent, false);
+
+				console.log('dropZone looks like: ');
+				console.log(dropZone);
+				
+				
+			}
+		
+		
+		</script>
+	
+	</body>
+</html>

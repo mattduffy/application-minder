@@ -4,6 +4,7 @@
   "description": "The best way to minder the statuses of your job applications.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,8 +13,12 @@
   },
   "author": "Matthew Duffy <mattduffy@gmail.com>",
   "license": "ISC",
+  "readme": "README.md",
   "bugs": {
     "url": "https://github.com/mattduffy/application-minder/issues"
   },
-  "homepage": "https://github.com/mattduffy/application-minder#readme"
+  "homepage": "https://github.com/mattduffy/application-minder#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
